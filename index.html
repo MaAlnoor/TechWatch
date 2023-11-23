@@ -1,13 +1,87 @@
 <!DOCTYPE html>
 <html>
-    <head>    
-    <title> Tech Watch </title>
-    <link rel="stylesheet" type="text/css" href="style.css">
-    </head>
-    <body>
+<head>
+  <title>Your Website Title</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <ul>
+        <li><a href="#news">News</a></li>
+        <li><a href="#games">Games</a></li>
+        <li><a href="#entertainment">Entertainment</a></li>
+        <li><a href="#others">Others</a></li>
+      </ul>
+      <input type="text" placeholder="Search...">
+    </nav>
+  </header>
 
-        <h1>Tech Watch</h1>
+  
+  <section id="news-section">
+    <div class="main-news-item">
+      <div class="content">
+        <div class="image">
+          <img src="news-image-url" alt="News Image">
+        </div>
+        <div class="text">
+          <h2>News Title</h2>
+          <p>News Summary</p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="small-news-container">
+      <div class="small-news-item">
+        <div class="content">
+          <div class="image">
+            <img src="news-image-url" alt="News Image">
+          </div>
+          <div class="text">
+            <h3>News Title</h3>
+            <p>News Summary</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="small-news-item">
+        <div class="content">
+          <div class="image">
+            <img src="news-image-url" alt="News Image">
+          </div>
+          <div class="text">
+            <h3>News Title</h3>
+            <p>News Summary</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="small-news-item">
+        <div class="content">
+          <div class="image">
+            <img src="news-image-url" alt="News Image">
+          </div>
+          <div class="text">
+            <h3>News Title</h3>
+            <p>News Summary</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  
+ <script>
+    fetch('your-api-endpoint')
+  .then(response => response.json())
+  .then(data => {
+    // Process and display the news data here
+  })
+  .catch(error => {
+    // Handle any errors that occurred during the API request
+  });
 
-        <p>this is the latest tech news</p>
-    </body>
+</script>
+  
+</body>
 </html>
