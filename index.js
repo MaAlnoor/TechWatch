@@ -9,13 +9,13 @@ const newsType = document.getElementById("newsType");
 const newsdetails = document.getElementById("newsdetails");
 
 // Array
-var newsDataArr = [];
+var newsDataArray = [];
 
 // apis 
 const API_KEY = "3ec2b5cc26d645b692dbe9ac73bef28b";
-const GENERAL_NEWS = "https://newsapi.org/v2/top-headlines?country=us&category=general&apiKey=";
-const ENTERTAINMENT_NEWS = "https://newsapi.org/v2/top-headlines?country=us&category=entertainment&apiKey=";
-const TECHNOLOGY_NEWS = "https://newsapi.org/v2/top-headlines?country=us&category=technology&pageSize=8&apiKey=";
+const GENERAL_NEWS = "https://newsapi.org/v2/top-headlines?country=gb&category=general&apiKey=";
+const ENTERTAINMENT_NEWS = "https://newsapi.org/v2/top-headlines?country=gb&category=entertainment&apiKey=";
+const TECHNOLOGY_NEWS = "https://newsapi.org/v2/top-headlines?country=gb&category=technology&pageSize=30&apiKey=";
 const SEARCH_NEWS = "https://newsapi.org/v2/everything?q=";
 
 window.onload = function() {
@@ -47,12 +47,11 @@ searchBtn.addEventListener("click",function(){
 
 const fetchHeadlines = async () => {
     const response = await fetch(HEADLINES_NEWS+API_KEY);
-    newsDataArr = [];
+    newsDataArray = [];
     if(response.status >=200 && response.status < 300) {
         const myJson = await response.json();
-        newsDataArr = myJson.articles;
+        newsDataArray = myJson.articles;
     } else {
-        // handle errors
         console.log(response.status, response.statusText);
         newsdetails.innerHTML = "<h5>No data found.</h5>"
         return;
@@ -64,12 +63,11 @@ const fetchHeadlines = async () => {
 
 const fetchGeneralNews = async () => {
     const response = await fetch(GENERAL_NEWS+API_KEY);
-    newsDataArr = [];
+    newsDataArray = [];
     if(response.status >=200 && response.status < 300) {
         const myJson = await response.json();
-        newsDataArr = myJson.articles;
+        newsDataArray = myJson.articles;
     } else {
-        // handle errors
         console.log(response.status, response.statusText);
         newsdetails.innerHTML = "<h5>No data found.</h5>"
         return;
@@ -81,13 +79,12 @@ const fetchGeneralNews = async () => {
 
 const fetchEntertainmentNews = async () => {
     const response = await fetch(ENTERTAINMENT_NEWS+API_KEY);
-    newsDataArr = [];
+    newsDataArray = [];
     if(response.status >=200 && response.status < 300) {
         const myJson = await response.json();
         console.log(myJson);
-        newsDataArr = myJson.articles;
+        newsDataArray = myJson.articles;
     } else {
-        // handle errors
         console.log(response.status, response.statusText);
         newsdetails.innerHTML = "<h5>No data found.</h5>"
         return;
@@ -100,12 +97,11 @@ const fetchEntertainmentNews = async () => {
 
 const fetchTechnologyNews = async () => {
     const response = await fetch(TECHNOLOGY_NEWS+API_KEY);
-    newsDataArr = [];
+    newsDataArray = [];
     if(response.status >=200 && response.status < 300) {
         const myJson = await response.json();
-        newsDataArr = myJson.articles;
+        newsDataArray = myJson.articles;
     } else {
-        // handle errors
         console.log(response.status, response.statusText);
         newsdetails.innerHTML = "<h5>No data found.</h5>"
         return;
@@ -120,10 +116,10 @@ const fetchQueryNews = async () => {
         return;
 
     const response = await fetch(SEARCH_NEWS+encodeURIComponent(newsQuery.value)+"&apiKey="+API_KEY);
-    newsDataArr = [];
+    newsDataArray = [];
     if(response.status >= 200 && response.status < 300) {
         const myJson = await response.json();
-        newsDataArr = myJson.articles;
+        newsDataArray = myJson.articles;
     } else {
         //error handle
         console.log(response.status, response.statusText);
@@ -138,12 +134,8 @@ function displayNews() {
 
     newsdetails.innerHTML = "";
 
-    // if(newsDataArr.length == 0) {
-    //     newsdetails.innerHTML = "<h5>No data found.</h5>"
-    //     return;
-    // }
 
-    newsDataArr.forEach(news => {
+    newsDataArray.forEach(news => {
 
         var date = news.publishedAt.split("T");
         
@@ -152,12 +144,7 @@ function displayNews() {
 
         var card = document.createElement('div');
         card.className = "p-2";
-
-        var image = document.createElement('img');
-        image.setAttribute("height","matchparent");
-        image.setAttribute("width","100%");
-        image.src=news.urlToImage;
-
+        
         var cardBody = document.createElement('div');
         
         var newsHeading = document.createElement('h5');
@@ -168,10 +155,6 @@ function displayNews() {
         dateHeading.className = "text-primary";
         dateHeading.innerHTML = date[0];
 
-        var discription = document.createElement('p');
-        discription.className="text-muted";
-        discription.innerHTML = news.description;
-
         var link = document.createElement('a');
         link.className="btn btn-dark";
         link.setAttribute("target", "_blank");
@@ -180,10 +163,8 @@ function displayNews() {
 
         cardBody.appendChild(newsHeading);
         cardBody.appendChild(dateHeading);
-        cardBody.appendChild(discription);
         cardBody.appendChild(link);
 
-        card.appendChild(image);
         card.appendChild(cardBody);
 
         col.appendChild(card);
@@ -192,4 +173,6 @@ function displayNews() {
     });
 
 }
+
+
 
